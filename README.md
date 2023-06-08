@@ -1,8 +1,7 @@
 
 # Adaptive layouts
 ![CHEESE!](tablet.png)
-![CHEESE!](mobile_list.png)
-![CHEESE!](moblie_detail.png)
+![CHEESE!](mobile.png) 
 I have used
 #### kotlin
 
