@@ -1,5 +1,5 @@
 
-# GraphQl with Androdi
+# GraphQL with Android
 
 I have used
 #### kotlin
