@@ -1,7 +1,6 @@
 
-# Adaptive layouts
-![CHEESE!](tablet.png)
-![CHEESE!](mobile.png) 
+# GraphQl with Androdi
+
 I have used
 #### kotlin
 
@@ -20,14 +19,7 @@ You must have newest Android Studio to run this Project
 #### Description
 - we can use different resource folder for different build flavor, for example if we want to use different color scheme, different launcher icon and many more
 
-### Production
-- applicationId = "com.example.adaptivelayouts"
-- app_name = Adaptive Layouts
-- API= http://api.duckduckgo.com/?q=simpsons+characters&format=json
-### Staging
-- applicationId = "com.example.adaptivelayouts.staging"
-- app_name = Adaptive Layouts
-- API= http://api.duckduckgo.com/?q=simpsons+characters&format=json
+ 
 
 
 ### Fragments
@@ -38,8 +30,5 @@ You must have newest Android Studio to run this Project
 ### Architecture(MVVM)
 - MVVM used as Architecture
 - i have used Dagger hilt as dependency injection.
-- Retrofit for calling pai
-### Tablet view
-- For handling Tablet i have used SlidingPaneLayout which is google recommend
-- [here](https://developer.android.com/develop/ui/views/layout/twopane) you can see the documentation 
+- Retrofit for calling API
 

@@ -8,7 +8,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.adaptivelayouts"
+    namespace = "com.example.graphql"
     compileSdk = 33
 
     defaultConfig {
@@ -42,10 +42,10 @@ android {
     productFlavors {
         create("Production") {
             android.buildFeatures.buildConfig = true
-            applicationId = "com.example.adaptivelayouts"
+            applicationId = "com.example.graphql"
             versionCode = 1
             versionName = "VersionOne-$versionCode"
-            resValue ("string", "app_name", "Adaptive Layouts")
+            resValue ("string", "app_name", "Graph QL")
             buildConfigField(
                 "String",
                 "baseUrl",
@@ -59,10 +59,10 @@ android {
         }
         create("Staging") {
             android.buildFeatures.buildConfig = true
-            applicationId = "com.example.adaptivelayouts.staging"
+            applicationId = "com.example.graphql.staging"
             versionCode = 1
             versionName = "VersionTwo-$versionCode"
-            resValue ("string", "app_name", "Adaptive Layouts")
+            resValue ("string", "app_name", "Graph QL")
             buildConfigField(
                 "String",
                 "baseUrl",
