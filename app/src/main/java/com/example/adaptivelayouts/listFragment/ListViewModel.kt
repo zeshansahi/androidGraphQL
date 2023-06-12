@@ -42,11 +42,8 @@ class ListViewModel @Inject constructor(
         try {
             repository.getCountriesList().let {
                 if (it.data != null) {
-                    var singleCountry: ArrayList<SingleCountry> = arrayListOf();
-                    it.data?.countries?.forEach { country ->
-                        singleCountry.add(country?.toSimpleCountry()!!)
-                    }
-                    var mainObject = MainObject(singleCountry = singleCountry)
+                    var mainObject =
+                        MainObject(singleCountry = it.data?.countries?.map { it?.toSimpleCountry()!! }!!)
                     countriesList.postValue(Resource.success(mainObject))
                 } else {
                     countriesList.postValue(Resource.error("Error code: ${it.errors}", null))
