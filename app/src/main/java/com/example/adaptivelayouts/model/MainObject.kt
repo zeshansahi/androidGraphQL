@@ -3,7 +3,7 @@ package com.example.adaptivelayouts.model
 
 data class MainObject(
 
-    var SingleCountry: ArrayList<SingleCountry> = arrayListOf(),
+    var singleCountry: ArrayList<SingleCountry> = arrayListOf(),
 
     )
 

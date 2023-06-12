@@ -14,7 +14,7 @@ class ListAdapter(detailList: List<SingleCountry>, val callBack: CallBack) :
     class TempItemViewHolder(val binding: ItemTempBinding, val callBack: CallBack) :
         RecyclerView.ViewHolder(binding.root) {
         fun bindData(listItem: SingleCountry) {
-            binding.items = listItem.name
+            binding.items = "${listItem.emoji} ${listItem.name}"
             binding.cvItem.setOnClickListener { callBack.onItemClick(listItem) }
         }
     }

@@ -61,7 +61,7 @@ class ListFragment : Fragment(), ListAdapter.CallBack {
 
 
     fun getPostList() {
-        viewModel.weatherList.observe(viewLifecycleOwner) {
+        viewModel.countriesList.observe(viewLifecycleOwner) {
             when (it.status) {
                 Resource.Status.LOADING -> {
 
@@ -70,7 +70,7 @@ class ListFragment : Fragment(), ListAdapter.CallBack {
                 Resource.Status.SUCCESS -> {
 
                     it.data?.let {
-                        listData.addAll(it.SingleCountry)
+                        listData.addAll(it.singleCountry)
                         setDataToAdaptor(listData)
                     }
 
