@@ -4,17 +4,17 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.adaptivelayouts.base.BaseRecyclerViewAdapter
-import com.example.adaptivelayouts.databinding.ItemTempBinding
-import com.example.adaptivelayouts.model.RelatedTopics
+import com.example.graphql.databinding.ItemTempBinding
+import com.example.adaptivelayouts.model.SingleCountry
 
-class ListAdapter(detailList: List<RelatedTopics>, val callBack: CallBack) :
-    BaseRecyclerViewAdapter<RelatedTopics, ListAdapter.TempItemViewHolder>(detailList.toMutableList()) {
+class ListAdapter(detailList: List<SingleCountry>, val callBack: CallBack) :
+    BaseRecyclerViewAdapter<SingleCountry, ListAdapter.TempItemViewHolder>(detailList.toMutableList()) {
 
 
     class TempItemViewHolder(val binding: ItemTempBinding, val callBack: CallBack) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bindData(listItem: RelatedTopics) {
-            binding.items = listItem.Text?.substringBefore("-")
+        fun bindData(listItem: SingleCountry) {
+            binding.items = listItem.name
             binding.cvItem.setOnClickListener { callBack.onItemClick(listItem) }
         }
     }
@@ -33,12 +33,12 @@ class ListAdapter(detailList: List<RelatedTopics>, val callBack: CallBack) :
         holder.bindData(mList[position])
     }
 
-    override fun setData(list: List<RelatedTopics>) {
+    override fun setData(list: List<SingleCountry>) {
         mList.clear()
         mList.addAll(list)
     }
 
     interface CallBack {
-        fun onItemClick(item:RelatedTopics)
+        fun onItemClick(item:SingleCountry)
     }
 }

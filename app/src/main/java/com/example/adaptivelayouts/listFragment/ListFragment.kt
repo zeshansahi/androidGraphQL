@@ -10,17 +10,17 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.adaptivelayouts.api.Resource
-import com.example.adaptivelayouts.databinding.FragmentListBinding
+import com.example.graphql.databinding.FragmentListBinding
 import dagger.hilt.android.AndroidEntryPoint
 import com.example.adaptivelayouts.listFragment.postAdapter.ListAdapter
-import com.example.adaptivelayouts.model.RelatedTopics
+import com.example.adaptivelayouts.model.SingleCountry
 import com.example.adaptivelayouts.utils.SportsListOnBackPressedCallback
 
 @AndroidEntryPoint
 class ListFragment : Fragment(), ListAdapter.CallBack {
     private val viewModel: ListViewModel by activityViewModels()
     private val listAdapter = ListAdapter(emptyList(), this)
-    private val listData = arrayListOf<RelatedTopics>()
+    private val listData = arrayListOf<SingleCountry>()
 
     private lateinit var _binding: FragmentListBinding
     override fun onCreateView(
@@ -70,7 +70,7 @@ class ListFragment : Fragment(), ListAdapter.CallBack {
                 Resource.Status.SUCCESS -> {
 
                     it.data?.let {
-                        listData.addAll(it.RelatedTopics)
+                        listData.addAll(it.SingleCountry)
                         setDataToAdaptor(listData)
                     }
 
@@ -83,19 +83,19 @@ class ListFragment : Fragment(), ListAdapter.CallBack {
         }
     }
 
-    private fun setDataToAdaptor(list: List<RelatedTopics>) {
+    private fun setDataToAdaptor(list: List<SingleCountry>) {
         listAdapter.setData(list)
         listAdapter.notifyDataSetChanged()
     }
 
-    override fun onItemClick(item: RelatedTopics) {
+    override fun onItemClick(item: SingleCountry) {
         viewModel.updateData(item)
         _binding.slidingPaneLayout.openPane()
     }
 
     fun filter(query: String) {
         var filteredList =
-            listData.filter { it.Text?.contains(query,ignoreCase = true)!! }
+            listData.filter { it.name?.contains(query, ignoreCase = true)!! }
         setDataToAdaptor(filteredList)
     }
 

@@ -5,6 +5,11 @@ plugins {
     id("org.jetbrains.kotlin.android")
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
+    id("com.apollographql.apollo3").version("3.7.3")
+}
+apollo {
+    generateKotlinModels.set(true)
+    packageNamesFromFilePaths()
 }
 
 android {
@@ -49,12 +54,7 @@ android {
             buildConfigField(
                 "String",
                 "baseUrl",
-                "\"https://api.duckduckgo.com/\""
-            )
-            buildConfigField(
-                "String",
-                "endPoint",
-                "\"simpsons+characters\""
+                "\"https://countries.trevorblades.com/\""
             )
         }
         create("Staging") {
@@ -66,12 +66,7 @@ android {
             buildConfigField(
                 "String",
                 "baseUrl",
-                "\"https://api.duckduckgo.com/\""
-            )
-            buildConfigField(
-                "String",
-                "endPoint",
-                "\"the+wire+characters\""
+                "\"https://countries.trevorblades.com/\""
             )
 
         }
@@ -117,6 +112,7 @@ dependencies {
     implementation ("androidx.lifecycle:lifecycle-extensions:2.2.0")
     implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
     implementation ("androidx.slidingpanelayout:slidingpanelayout:1.2.0-rc01")
+    implementation("com.apollographql.apollo3:apollo-runtime:3.7.3")
 
 }
 kapt {

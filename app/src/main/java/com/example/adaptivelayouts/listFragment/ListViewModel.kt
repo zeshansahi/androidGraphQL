@@ -3,10 +3,10 @@ package com.example.adaptivelayouts.listFragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.adaptivelayouts.BuildConfig
 import com.example.adaptivelayouts.api.Resource
+import com.example.adaptivelayouts.api.toSimpleCountry
 import com.example.adaptivelayouts.model.MainObject
-import com.example.adaptivelayouts.model.RelatedTopics
+import com.example.adaptivelayouts.model.SingleCountry
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -19,9 +19,9 @@ class ListViewModel @Inject constructor(
     private val TAG = "PostViewModel"
     val weatherList: MutableLiveData<Resource<MainObject>> =
         MutableLiveData<Resource<MainObject>>()
-    val sharedData: MutableLiveData<RelatedTopics> = MutableLiveData()
+    val sharedData: MutableLiveData<SingleCountry> = MutableLiveData()
 
-    fun updateData(newData: RelatedTopics) {
+    fun updateData(newData: SingleCountry) {
         sharedData.value = newData
     }
 
@@ -31,14 +31,19 @@ class ListViewModel @Inject constructor(
     }
 
     fun getListAboutWeather() = viewModelScope.launch {
-        val encodedQuery =BuildConfig.endPoint
+
         weatherList.postValue(Resource.loading("loading", null))
         try {
-            repository.getTempList(encodedQuery).let {
-                if (it.isSuccessful) {
-                    weatherList.postValue(Resource.success(it.body()))
+            repository.getTempList().let {
+                if (it.data !=null) {
+                    var singleCountry: ArrayList<SingleCountry> = arrayListOf();
+                    for (obj in it!!.data!!.countries!!){
+                        singleCountry.add(obj?.toSimpleCountry()!!)
+                    }
+                    var mainObject=MainObject(SingleCountry=singleCountry)
+                    weatherList.postValue(Resource.success(mainObject))
                 } else {
-                    weatherList.postValue(Resource.error("Error code: ${it.code()}", null))
+                    weatherList.postValue(Resource.error("Error code: ${it.errors}", null))
                 }
             }
         } catch (e: Exception) {

@@ -8,8 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
-import com.example.adaptivelayouts.databinding.FragmentDetailBinding
 import com.example.adaptivelayouts.listFragment.ListViewModel
+import com.example.graphql.databinding.FragmentDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,11 +24,10 @@ class DetailFragment : Fragment() {
         _binding = FragmentDetailBinding.inflate(inflater)
         viewModel.sharedData.observe(viewLifecycleOwner) {
             _binding.apply {
-                tvName.text = it?.Text?.substringBefore("-")
-                tvDetail.text = it?.Text
-                var url="${it.FirstURL}${it.Icon?.URL}"
-                Log.e("TAG", "onCreateView: $url", )
-                imgIcon.setImageURI("$url")
+                tvName.text = it?.name
+                tvDetail.text = "${it?.name}- ${it.emoji}"
+
+
                 clData.isVisible = true
                 clNoData.isVisible = false
 

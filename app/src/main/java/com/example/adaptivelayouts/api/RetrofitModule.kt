@@ -1,6 +1,8 @@
 package com.example.adaptivelayouts.api
 
-import com.example.adaptivelayouts.BuildConfig
+import com.apollographql.apollo3.ApolloClient
+import com.apollographql.apollo3.network.okHttpClient
+import com.example.graphql.BuildConfig
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -35,15 +37,25 @@ object RetrofitModule{
             .build()
     }
 
-    @Singleton
-    @Provides
-    fun provideRetrofit(okHttpClient: OkHttpClient, BASE_URL:String): Retrofit = Retrofit.Builder()
-        .addConverterFactory(GsonConverterFactory.create())
-        .baseUrl(BASE_URL)
-        .client(okHttpClient)
-        .build()
+//    @Singleton
+//    @Provides
+//    fun provideRetrofit(okHttpClient: OkHttpClient, BASE_URL:String): Retrofit = Retrofit.Builder()
+//        .addConverterFactory(GsonConverterFactory.create())
+//        .baseUrl(BASE_URL)
+//        .client(okHttpClient)
+//        .build()
+//
+//    @Provides
+//    @Singleton
+//    fun provideApiService(retrofit: Retrofit) = retrofit.create(ApiService::class.java)
 
-    @Provides
+
     @Singleton
-    fun provideApiService(retrofit: Retrofit) = retrofit.create(ApiService::class.java)
+    @Provides
+    fun provideApolloClient(okHttpClient: OkHttpClient,BASE_URL:String): ApolloClient {
+        return ApolloClient.Builder()
+            .serverUrl(BASE_URL)
+            .okHttpClient(okHttpClient)
+            .build()
+    }
 }
